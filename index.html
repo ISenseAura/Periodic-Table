@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="Elements.js"></script>
+  </head>
+
+  <style>
+    body {
+      background-color: #ffffff;
+    }
+  </style>
+
+  <body onload="sortTable()">
+    <table id="output" style="padding:3px;width:10px;font-size:11px;"></table>
+
+    <hr />
+
+    <div id="output2" style="overflow-x:hidden;padding:3px;"></div>
+
+    <script>
+      function sortTable() {
+        let ES = {};
+        let p = 1;
+        let tab = "<tr>";
+        for (let i = 1; i < 19; i++) {
+          let ab;
+          //alert(i + "," + p);
+          if (!(i % 18)) {
+            tab += `<td id='(${i},${p})'></td></tr><tr>`;
+          } else {
+            tab += `<td id='(${i},${p})'></td>`;
+          }
+          if (!(i % 18)) p++;
+          if (!(i % 18)) i = 0;
+          if (p == "12") i = 19;
+        }
+        document.getElementById("output").innerHTML += tab;
+
+        for (let i = 0; i < Elements.length; i++) {
+          let e = Elements[i];
+          let Name,
+            number,
+            symbol,
+            appearance,
+            atomicmass,
+            Category,
+            bp,
+            mp,
+            mh,
+            density,
+            gp,
+            disc,
+            name;
+          Name = e.name;
+          number = e.number;
+          appearance = e.appearance;
+          atomicmass = e.atomic_mass;
+          Category = e.category;
+          density = e.density;
+          disc = e.discovered_by;
+          mp = e.melt;
+          bp = e.boil;
+          mh = e.molar_heat;
+          symbol = e.symbol;
+          gp = e.xpos + "|" + e.ypos;
+          name = e.named_by;
+
+          let phase, shells, config, configs, ef, en, ie;
+          phase = e.phase;
+          shells = e.shells;
+          config = e.electron_configuration;
+          configs = e.electron_configuration_semantic;
+          en = e.electronegativity_pauling;
+          ie = e.ionization_energies;
+          ef = e.electron_affinity;
+
+          let html = `	<div>
+	<h2> ${Name} (${number}) </h2>
+	<table border="1">
+	<tr>
+	<td> <b> Symbol </b> </td>
+	<td> ${symbol} </td>
+	</tr>
+			<tr>
+	<td> <b> Appearance</b> </td>
+	<td> ${appearance} </td>
+	</tr>
+		<tr>
+	<td> <b> Atomic Mass </b> </td>
+	<td> ${atomicmass} </td>
+	</tr>
+		<tr>
+	<td> <b> Category </b> </td>
+	<td> ${Category} </td>
+	</tr>
+		<tr>
+	<td> <b> Phase </b> </td>
+	<td> ${phase} </td>
+	</tr>
+		<tr>
+	<td> <b> Boiling Point</b> </td>
+	<td> ${bp} </td>
+	</tr>
+		<tr>
+	<td> <b> Melting Point</b> </td>
+	<td> ${mp} </td>
+	</tr>
+			<tr>
+	<td> <b> Molar Heat</b> </td>
+	<td> ${mh} </td>
+	</tr>
+			<tr>
+	<td> <b> Density</b> </td>
+	<td> ${density} </td>
+	</tr>
+		<tr>
+	<td> <b>Group/Period </b> </td>
+	<td> ${gp}</td>
+	</tr>
+	
+			<tr>
+	<td> <b> Discovered By </b> </td>
+	<td> ${disc} </td>
+	</tr>
+	
+			<tr>
+	<td> <b> Named By</b> </td>
+	<td> ${name} </td>
+	</tr>
+	
+		<tr>
+	<td> <b> Shells </b> </td>
+	<td> ${shells}</td>
+	</tr>
+	
+			<tr>
+	<td> <b> Electron Config.</b> </td>
+	<td> ${config}</td>
+	</tr>
+	
+			<tr>
+	<td> <b> Electron Config. (Semantic)</b> </td>
+	<td> ${configs}</td>
+	</tr>
+	
+			<tr>
+	<td> <b> Electron Affinity</b> </td>
+	<td> ${ef}</td>
+	</tr>		
+	
+	<tr>
+	<td> <b> Electron Negativity </b> </td>
+	<td> ${en}</td>
+	</tr>
+	
+			<tr>
+	<td> <b> Ionization Energies  </b> </td>
+	<td> ${ie}</td>
+	</tr>
+	
+	</table>
+	</div>
+	`;
+
+          Elements[i].html = html;
+          let html2 = `<button style="margin-left:-2px;margin-top:0px;font-size:13px;border:1px solid blue;border-radius:5px;background:#${
+            e["cpk-hex"]
+          };" onclick="document.getElementById('output2').innerHTML = Elements[${i}].html;"> ${symbol} </button>`;
+          let idd = `(${e.xpos},${e.ypos})`;
+          if (e.symbol == "La") idd = "(3,6)";
+          if (e.symbol == "Ac") idd = "(3,7)";
+
+          try {
+            document.getElementById(idd).innerHTML = html2;
+          } catch (e) {
+            alert(idd);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
