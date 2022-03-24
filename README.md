@@ -3,7 +3,7 @@ Prints Modern Periodic Table.
 
 Clicking element's symbol gives you a bunch of information about the element that you can't even handle 
 
-DM for the explanation of table sorting algorithm
+DM for the explanation of table sorting algorith
 
 [PREVIEW](https://hulking-mulberry-concrete.glitch.me/)
 
